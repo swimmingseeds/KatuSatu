@@ -77,7 +77,7 @@ $(document).ready(function() {
 function processData(text) {
   var parsed = CSV.parse(text);
   graphIt("rawLineGraph", "신청자수", parsed);
-  
+
   var hourDiff = [];
   hourDiff.push(parsed[0]);//first Row. Header.
   for(var i=2; i<parsed.length; i++) {
@@ -128,10 +128,6 @@ function graphIt(divName, title, data_) {
 
   chart.cursor = new am4charts.XYCursor();
   chart.cursor.xAxis = dateAxis;
-
-  var scrollbarX = new am4charts.XYChartScrollbar();
-  scrollbarX.series.push(series);
-  chart.scrollbarX = scrollbarX;
 
   chart.legend = new am4charts.Legend();
   chart.legend.parent = chart.plotContainer;
