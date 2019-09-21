@@ -21,7 +21,38 @@
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<title>2019 KATUSA - Stats</title>
 
+<style>
+.chart-title {
+  padding: 15px;
+}
+
+#share-buttons img {
+width: 35px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+
+.pri-title {
+  font-size: 20px;
+  font-weight: 600
+}
+
+.pri-value {
+  font-size: 15px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.countdown {
+  font-size: 40px;
+  font-weight:600;
+  text-align: center;
+}
+</style>
 
 <!-- Chart code -->
 <script>
@@ -106,7 +137,7 @@ function processData(text) {
   var max_rate = 0.0;
   var max_rate_idx = -1;
   for(var i=0; i<11; i++) {
-    var temp = Rates[Rates.length-1][i+1];
+    var temp = parseFloat(Rates[Rates.length-1][i+1]);
     if(temp > max_rate) {
       max_rate = temp;
       max_rate_idx = i;
@@ -194,27 +225,112 @@ function graphIt(divName, title, stack_, data_) {
 }
 </script>
 
-</head>
+<script>
+  var countDownDate = new Date("2019-09-24 14:00:00").getTime();
 
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+    // Get today's date and time
+    var now = new Date().getTime();
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+</script>
+
+</head>
 
 <body>
 <!-- HTML -->
-<section class="section">
-  <div class="row container"><!-- First Row -->
-    <div class="col-md-2">선발 인원:</div>
-    <div class="col-md-2">1600</div>
-    <div class="col-md-2">총 지원자수:</div>
-    <div class="col-md-2" id="numJeopsu"></div>
-    <div class="col-md-2">최대 지원률:</div>
-    <div class="col-md-2" id="maxRate"></div>
+<!-- <section class="section bg-primary" style="text-align:center;">
+  <div class="container feature mb-0 p-3">
+    <div class="row">
+      <div class="col-md-2 pri-title";>선발 인원</div>
+      <div class="col-md-2 pri-value">1600</div>
+      <div class="col-md-2">총 지원자수</div>
+      <div class="col-md-2" id="numJeopsu"></div>
+      <div class="col-md-2">최대 지원률</div>
+      <div class="col-md-2" id="maxRate"></div>
+    </div>
   </div>
-</section>
+</section> -->
+
+<div class="container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">선발 인원</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">1600<small class="text-muted">명</small></h1>
+          </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">총 지원자수</h4>
+          </div>
+          <div class="card-body">
+            <h1><div id="numJeopsu"></div></h1>
+          </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">최대 지원률</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title"><div id="maxRate">00.0</div></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9"><!-- Countdown.-->
+        <p id="demo" class="countdown"></p>
+    </div>
+    <div class="col-md-3">
+      <!-- Twitter -->
+      <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+      </a>
+      <!-- Reddit -->
+      <a href="http://reddit.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+      </a>
+      <!-- Facebook -->
+      <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+      </a>
+    </div>
+  </div><!-- Row.-->
+</div>
 
 <section class="section">
-<h2>지원률</h2>
+<h1 class="chart-title text-center">지원률</h1>
 <div id="ratesGraph" style="width: 100%; height: 400px;"></div>
+<hr class="small" />
+<h1 class="chart-title text-center">세부 지원자수(누적)</h1>
 <div id="rawLineGraph" style="width: 100%; height: 500px;"></div>
+<hr class="small" />
+<h1 class="chart-title text-center">시간대별 지원자수</h1>
 <div id="hourDiffLineGraph" style="width: 100%; height: 600px;"></div>
+<hr class="small" />
 </section>
 
 </body>
