@@ -314,7 +314,7 @@ function graphIt(divName, title, stack_, data_) {
   <h1 class="m-0" style="text-align: center; vertical-align: middle;">2020 KATUSA(카투사) 통계 & 카운트다운</h1>
 </div>
 
-<div class="container">
+<section class="section p-3">
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 box-shadow">
       <div class="card-header">
@@ -341,9 +341,9 @@ function graphIt(divName, title, stack_, data_) {
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="container">
+<section class="section p-3">
   <div class="row">
     <div class="col-md-9 row countdown"><!-- Countdown.-->
         <p class="col-5">지원 마감까지</p>
@@ -364,11 +364,11 @@ function graphIt(divName, title, stack_, data_) {
       </a>
     </div>
   </div><!-- Row.-->
-</div>
+</section>
 
 <hr class="small" />
 
-<div class="container"><!-- Table! -->
+<section class="p-3"><!-- Table! -->
   <table class="table table-bordered">
     <thead class="thead-light">
       <tr>
@@ -403,15 +403,17 @@ function graphIt(divName, title, stack_, data_) {
       </tr>
     </tbody>
   </table>
-</div>
+</section>
 
 <section class="section">
 <h1 class="chart-title text-center">지원율 <small>(터치시 '수치값 표시')</small></h1>
 <div id="ratesGraph" style="width: 100%; height: 400px;"></div>
+
 <hr class="small" />
 <h1 class="chart-title text-center">세부 지원자수(누적)</h1>
 <div id="rawLineGraph" style="width: 100%; height: 500px;"></div>
 <hr class="small" />
+
 <h1 class="chart-title text-center">시간대별 지원자수</h1>
 <div id="hourDiffLineGraph" style="width: 100%; height: 600px;"></div>
 <hr class="small" />
