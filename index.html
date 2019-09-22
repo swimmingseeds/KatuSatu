@@ -191,7 +191,14 @@ function graphIt(divName, title, stack_, data_) {
 
   chart.data = data;
 
+  chart.dateFormatter.dateFormat = "yyyy-MM-dd";
+
   var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  dateAxis.dateFormatter = new am4core.DateFormatter();
+  dateAxis.dateFormatter.dateFormat = "MM-dd";
+  //dateAxis.dateFormats.setKey("day", "M/d/yyyy");
+  /*var dateAxis = new am4charts.DateAxis();
+  chart.dateX = dateAxis;*/
   dateAxis.renderer.grid.template.location = 0;
   dateAxis.renderer.labels.template.fill = am4core.color("#e59165");
 
@@ -208,18 +215,34 @@ function graphIt(divName, title, stack_, data_) {
     series.name = String(i + 2) + "월";
     series.dataFields.dateX = "DateTime";
     series.dataFields.valueY = "month_" + String(i + 2);
-    series.tooltipText = "{name}: {valueY.value}";
+    series.tooltipText = "{name}: [bold]{valueY.value}";
     series.stacked = stack_;
+    /*var bullet2 = series.bullets.push(new am4charts.CircleBullet());
+    var bullet2hover = bullet2.states.create("hover");
+    bullet2hover.properties.scale = 1.3;*/
   }
 
   chart.cursor = new am4charts.XYCursor();
   chart.cursor.xAxis = dateAxis;
+  chart.cursor.behavior = "none";
+
+  //chart.cursor.fullWidthLineX = true;
+
+  /*chart.cursor.lineY.stroke = am4core.color("#8F3985");
+  chart.cursor.lineY.strokeWidth = 4;
+  chart.cursor.lineY.strokeOpacity = 0.2;
+  chart.cursor.lineY.strokeDasharray = "-";*/
+
+  //ScrollBar!!
+  /*var scrollbarX = new am4charts.XYChartScrollbar();
+  scrollbarX.series.push(series);
+  chart.scrollbarX = scrollbarX;*/
 
   chart.legend = new am4charts.Legend();
   chart.legend.parent = chart.plotContainer;
-  chart.legend.zIndex = 100;
+  chart.legend.zIndex = 100;//??
 
-  dateAxis.renderer.grid.template.strokeOpacity = 0.07;
+  dateAxis.renderer.grid.template.strokeOpacity = 0.2;//results in cleaner separation.
   valueAxis.renderer.grid.template.strokeOpacity = 0.07;
 
   chart.tapToActivate = true;
@@ -334,7 +357,7 @@ function graphIt(divName, title, stack_, data_) {
 </div>
 <hr class="small" />
 <section class="section">
-<h1 class="chart-title text-center">지원율 <small>(터치시 '수치값 표시' / 드래그시 'Zoom')</small></h1>
+<h1 class="chart-title text-center">지원율 <small>(터치시 '수치값 표시')</small></h1>
 <div id="ratesGraph" style="width: 100%; height: 400px;"></div>
 <hr class="small" />
 <h1 class="chart-title text-center">세부 지원자수(누적)</h1>
