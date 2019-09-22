@@ -60,6 +60,14 @@ display: inline;
   font-weight:600;
   text-align: center;
 }
+
+.table td {
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
+}
 </style>
 
 <!-- Chart code -->
@@ -152,6 +160,7 @@ function processData(text) {
     }
     //
     total_JeopSu += parseInt(parsed[parsed.length - 1][i + 1]);//add.
+    $("#rate_month_" + String(i + 2)).text(String(temp));//update 실시간 지원율 table.
   }
 
   $("#maxRate").text(String(max_rate) + " (" + String(max_rate_idx+2) + "월)");
@@ -191,7 +200,7 @@ function graphIt(divName, title, stack_, data_) {
 
   chart.data = data;
 
-  chart.dateFormatter.dateFormat = "yyyy-MM-dd";
+  //chart.dateFormatter.dateFormat = "yyyy-MM-dd";
 
   var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
   dateAxis.dateFormatter = new am4core.DateFormatter();
@@ -217,6 +226,7 @@ function graphIt(divName, title, stack_, data_) {
     series.dataFields.valueY = "month_" + String(i + 2);
     series.tooltipText = "{name}: [bold]{valueY.value}";
     series.stacked = stack_;
+    //series.legendSettings.itemValueText = "{valueY}";
     /*var bullet2 = series.bullets.push(new am4charts.CircleBullet());
     var bullet2hover = bullet2.states.create("hover");
     bullet2hover.properties.scale = 1.3;*/
@@ -305,33 +315,33 @@ function graphIt(divName, title, stack_, data_) {
 </div>
 
 <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">선발 인원</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">1600<small class="text-muted">명</small></h1>
-          </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">총 지원자수</h4>
-          </div>
-          <div class="card-body">
-            <h1><div id="numJeopsu"></div></h1>
-          </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">최대 지원율</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title"><div id="maxRate">00.0</div></h1>
-          </div>
-        </div>
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">선발 인원</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">1600<small class="text-muted">명</small></h1>
       </div>
     </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">총 지원자수</h4>
+      </div>
+      <div class="card-body">
+        <h1><div id="numJeopsu"></div></h1>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">최대 지원율</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title"><div id="maxRate">00.0</div></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="row">
@@ -355,7 +365,46 @@ function graphIt(divName, title, stack_, data_) {
     </div>
   </div><!-- Row.-->
 </div>
+
 <hr class="small" />
+
+<div class="container"><!-- Table! -->
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">현재 지원율</th>
+        <th scope="col">2월</th>
+        <th scope="col">3월</th>
+        <th scope="col">4월</th>
+        <th scope="col">5월</th>
+        <th scope="col">6월</th>
+        <th scope="col">7월</th>
+        <th scope="col">8월</th>
+        <th scope="col">9월</th>
+        <th scope="col">10월</th>
+        <th scope="col">11월</th>
+        <th scope="col">12월</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="font-weight: bold">
+        <th scope="row"></th>
+        <td id="rate_month_2">0</td>
+        <td id="rate_month_3">0</td>
+        <td id="rate_month_4">0</td>
+        <td id="rate_month_5">0</td>
+        <td id="rate_month_6">0</td>
+        <td id="rate_month_7">0</td>
+        <td id="rate_month_8">0</td>
+        <td id="rate_month_9">0</td>
+        <td id="rate_month_10">0</td>
+        <td id="rate_month_11">0</td>
+        <td id="rate_month_12">0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <section class="section">
 <h1 class="chart-title text-center">지원율 <small>(터치시 '수치값 표시')</small></h1>
 <div id="ratesGraph" style="width: 100%; height: 400px;"></div>
