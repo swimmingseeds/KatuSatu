@@ -282,7 +282,8 @@ function graphIt(divName, title, stack_, data_) {
   // Update the count down every 1 second
   var x = setInterval(function() {
     // Get today's date and time
-    var now = new Date().getTime();
+    //<Safari Fix(191022)>. Worked in Chrome. (https://stackoverflow.com/questions/48703320/why-new-date-function-not-working-in-safari)
+    var now = new Date().valueOf();//new Date().getTime();
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
 
