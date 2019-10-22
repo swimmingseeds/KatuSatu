@@ -279,8 +279,15 @@ function graphIt(divName, title, stack_, data_) {
 <script>
   //var countDownDate = new Date("2019-11-07 12:00:00").getTime();
   
-  var countDownDate = Date.parse("2019-11-07 12:00:00", "Y-m-d H:i:s", true).getTime(); // returns null if not valid.
-  //<Safari Fix(191022)>. Worked in Chrome. (https://stackoverflow.com/questions/48703320/why-new-date-function-not-working-in-safari)
+  //https://stackoverflow.com/questions/6427204/date-parsing-in-javascript-is-different-between-safari-and-chrome
+  //parse function is NOT reliable, on various devices.(Ex. Safari).
+  function dateFromString(str) {
+    var a = $.map(str.split(/[^0-9]/), function(s) { return parseInt(s, 10) });
+    return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
+  }
+  
+  var countDownDate = dateFromString("2019-11-07 12:00:00");
+  //var countDownDate = Date.parse("2019-11-07 12:00:00", "Y-m-d H:i:s", true).getTime(); // returns null if not valid.
   
   // Update the count down every 1 second
   var x = setInterval(function() {
