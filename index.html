@@ -279,7 +279,7 @@ function graphIt(divName, title, stack_, data_) {
 <script>
   //var countDownDate = new Date("2019-11-07 12:00:00").getTime();
   
-  var countDownDate = Ext.Date.parse("2019-11-07 12:00:00", "Y-m-d H:i:s", true).getTime(); // returns null if not valid.
+  var countDownDate = Date.parse("2019-11-07 12:00:00", "Y-m-d H:i:s", true).getTime(); // returns null if not valid.
   //<Safari Fix(191022)>. Worked in Chrome. (https://stackoverflow.com/questions/48703320/why-new-date-function-not-working-in-safari)
   
   // Update the count down every 1 second
