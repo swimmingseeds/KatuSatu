@@ -231,7 +231,7 @@ function graphIt(divName, title, stack_, data_) {
 
   for(var i=0; i<11; i++) {
     var series = chart.series.push(new am4charts.LineSeries());
-    series.name = "Month-"String(i + 2);
+    series.name = "Month-" + String(i + 2);
     series.dataFields.dateX = "DateTime";
     series.dataFields.valueY = "month_" + String(i + 2);
     series.tooltipText = "{name}: [bold]{valueY.value}";
